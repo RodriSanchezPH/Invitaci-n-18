@@ -4,9 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>18 • Rodri — Invitación</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --gold:#FFD700;
@@ -29,8 +27,7 @@ body{
 body::before{
   content:"";
   position:fixed; inset:0;
-  background:
-    radial-gradient(circle, rgba(255,215,0,0.03) 1px, transparent 1px);
+  background: radial-gradient(circle, rgba(255,215,0,0.03) 1px, transparent 1px);
   background-size:22px 22px;
   pointer-events:none;
   z-index:-1;
@@ -117,15 +114,9 @@ body::before{
 .fiesta-subtext { color:#bdbdbd; font-size:1rem; margin-top:8px; }
 
 /* CONTROLES */
-.controls {
-  display:flex; gap:20px; justify-content:center; align-items:flex-start; flex-wrap:wrap; margin-top:6px;
-}
-.control{
-  display:flex; flex-direction:column; align-items:center; max-width:360px; width:100%;
-}
-.btn-message{
-  text-align:center; font-size:0.98rem; color:#f7e7b0; margin-bottom:10px; font-weight:400;
-}
+.controls { display:flex; gap:20px; justify-content:center; align-items:flex-start; flex-wrap:wrap; margin-top:6px; }
+.control{ display:flex; flex-direction:column; align-items:center; max-width:360px; width:100%; }
+.btn-message{ text-align:center; font-size:0.98rem; color:#f7e7b0; margin-bottom:10px; font-weight:400; }
 
 /* Botón pro: texto largo sin encimarse */
 .icon-btn {
@@ -141,9 +132,7 @@ body::before{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow: 0 10px 26px rgba(0,0,0,0.45), inset 0 0 6px rgba(255,255,255,0.28);
   cursor:pointer; transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-  white-space:normal;      /* Permite múltiples líneas */
-  word-break:break-word;   /* Corta palabras largas */
-  hyphens:auto;            /* Guiones automáticos cuando se pueda */
+  white-space:normal; word-break:break-word; hyphens:auto;
 }
 .icon-btn:hover{
   transform: translateY(-2px);
@@ -186,6 +175,11 @@ body::before{
 .panel .small-btn:hover{ filter:brightness(1.1) }
 .copied-tip{ margin-top:6px; font-size:.9rem; color:#e7fbea; opacity:0.95 }
 
+/* Nuevo mensaje gris confirmación */
+.confirm-msg-grey{
+  margin-bottom:8px; color:#b0b0b0; font-weight:500; font-size:1rem; text-align:center;
+}
+
 /* Mobile */
 @media(max-width:680px){
   .hero h1{ font-size:4.6rem }
@@ -204,7 +198,6 @@ body::before{
   <h2>Rodri</h2>
   <p>Quiero celebrar este momento tan especial rodeado de quienes han estado a mi lado en cada paso del camino.</p>
   <p>Cada risa, cada recuerdo y cada apoyo me han llevado hasta aquí, y nada sería igual sin ustedes. Gracias por formar parte de mi vida; será una noche para disfrutar, recordar y crear nuevos recuerdos juntos...</p>
-  <!-- Flecha animada -->
   <button class="arrow-down" aria-label="Bajar a la cuenta regresiva" id="arrowBtn" type="button">
     <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden="true">
       <path d="M19 10V28" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
@@ -222,7 +215,6 @@ body::before{
     <div class="countcard"><span class="num" id="seconds">0</span><small>Segundos</small></div>
   </div>
 
-  <!-- Apartado FIESTA -->
   <div class="party-info" style="margin-bottom:32px;">
     <span class="fiesta-title">FIESTA</span>
     <div class="fiesta-details">
@@ -232,10 +224,9 @@ body::before{
       <span class="fiesta-subtext">Clickeá en el botón de abajo y encontrá las indicaciones para llegar, ¡nos vemos!</span>
     </div>
   </div>
-  <!-- Fin apartado FIESTA -->
 
   <div class="controls" role="group" aria-label="Acciones">
-    <!-- Ubicación -->
+
     <div class="control">
       <div class="btn-message">Para llegar al salón</div>
       <button class="icon-btn" id="locationBtn" aria-expanded="false" aria-controls="locationPanel">
@@ -247,7 +238,6 @@ body::before{
       </div>
     </div>
 
-    <!-- Regalo -->
     <div class="control">
       <div class="btn-message">Si deseás dejar un detalle, clickeá acá abajo</div>
       <button class="icon-btn" id="giftBtn" aria-expanded="false" aria-controls="giftPanel">
@@ -261,19 +251,17 @@ body::before{
       </div>
     </div>
 
-    <!-- Confirmación -->
     <div class="control">
       <div class="btn-message">Confirmación de asistencia</div>
+      <div class="confirm-msg-grey">Cuento con tu presencia. ¡Confirmá tu asistencia!</div>
       <button class="icon-btn" id="confirmBtn" aria-expanded="false" aria-controls="confirmPanel">
         Confirmar asistencia
       </button>
       <div class="panel" id="confirmPanel" aria-hidden="true">
-        <p>Confirmá tu asistencia al número donde recibiste la invitación, indicando el nombre de todos los que asisten; o simplemente enviá: “No asisto”.</p>
-        <div id="confirmMsg" style="margin-top:10px; color:#222; font-weight:600;">
-          ¡Gracias por confirmar tu asistencia!
-        </div>
+        <!-- Mensaje ahora ya no se usará -->
       </div>
     </div>
+
   </div>
 </section>
 
@@ -313,10 +301,9 @@ function updateCountdown(){
     setTimeout(()=>el.style.transform='scale(1)',150);
   });
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
+setInterval(updateCountdown,1000); updateCountdown();
 
-/* ===== Panels: abrir/cerrar con transición y accesibilidad ===== */
+/* ===== Panels ===== */
 const panels = {
   location: document.getElementById('locationPanel'),
   gift: document.getElementById('giftPanel'),
@@ -359,7 +346,12 @@ function togglePanel(btnKey){
 /* Eventos de botones */
 buttons.location.addEventListener('click', ()=>togglePanel('location'));
 buttons.gift.addEventListener('click', ()=>togglePanel('gift'));
-buttons.confirm.addEventListener('click', ()=>togglePanel('confirm'));
+
+/* ===== Confirmación: redirigir a Google Forms ===== */
+buttons.confirm.addEventListener('click', () => {
+  setPanelState(panels.confirm, buttons.confirm, false);
+  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSdUtqrwGXFeSEcEhGKQROeYp0VdvFrOQx56KMzQdB7Oubpaig/viewform?usp=header";
+});
 
 /* ===== Ubicación: abrir Maps ===== */
 document.getElementById('openMapsBtn').addEventListener('click',()=>{
@@ -388,12 +380,10 @@ async function copyAlias(){
 }
 aliasText.addEventListener('click',copyAlias);
 copyBtn.addEventListener('click',copyAlias);
-
-/* ===== Confirmación: (panel ya controlado arriba) ===== */
-// Si quisieras auto-cerrar después de X segundos:
-// setTimeout(()=>closeAllPanels(), 5000);
 </script>
+
 </body>
 </html>
+
 
 
