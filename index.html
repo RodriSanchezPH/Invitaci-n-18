@@ -101,20 +101,6 @@ body::before{
   display:block; font-size:.9rem; color:#f7e7b0; opacity:0.95;
 }
 
-/* Imagen heartbeat */
-.heartbeat{
-  max-width:160px; width:100%; margin:10px auto;
-  animation: heartbeat 1.8s infinite;
-}
-@keyframes heartbeat {
-  0%{ transform:scale(1) }
-  14%{ transform:scale(1.25) }
-  28%{ transform:scale(1) }
-  42%{ transform:scale(1.25) }
-  70%{ transform:scale(1) }
-  100%{ transform:scale(1) }
-}
-
 /* FIESTA */
 .fiesta-title {
   display:block; font-family:'Dancing Script', cursive; font-size:2.8rem;
@@ -132,7 +118,7 @@ body::before{
 .control{ display:flex; flex-direction:column; align-items:center; max-width:360px; width:100%; }
 .btn-message{ text-align:center; font-size:0.98rem; color:#f7e7b0; margin-bottom:10px; font-weight:400; }
 
-/* Botón */
+/* Botón pro: texto largo sin encimarse */
 .icon-btn {
   width:100%;
   min-height:56px;
@@ -154,6 +140,11 @@ body::before{
   filter: brightness(1.03);
 }
 .icon-btn:active { transform: translateY(0); }
+.icon-btn:focus-visible{
+  outline: 3px solid rgba(255, 215, 0, .55);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255,215,0,0.15);
+}
 
 /* Panel desplegable */
 .panel{
@@ -181,6 +172,8 @@ body::before{
   color:var(--gold); font-weight:700; cursor:pointer;
   box-shadow: 0 6px 16px rgba(0,0,0,0.45);
 }
+.panel .small-btn:hover{ filter:brightness(1.1) }
+.copied-tip{ margin-top:6px; font-size:.9rem; color:#e7fbea; opacity:0.95 }
 
 /* Nuevo mensaje gris confirmación */
 .confirm-msg-grey{
@@ -194,36 +187,35 @@ body::before{
   .control{ max-width:100% }
   .icon-btn{ font-size:1rem; min-height:54px }
   .countcard span.num{ font-size:1.6rem }
+  .countdown{ flex-wrap:nowrap; overflow-x:auto; padding:0 10px; gap:12px; }
 }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <h1>18</h1>
+<section class="hero" aria-labelledby="title">
+  <h1 id="title">18</h1>
   <h2>Rodri</h2>
   <p>Quiero celebrar este momento tan especial rodeado de quienes han estado a mi lado en cada paso del camino.</p>
   <p>Cada risa, cada recuerdo y cada apoyo me han llevado hasta aquí, y nada sería igual sin ustedes. Gracias por formar parte de mi vida; será una noche para disfrutar, recordar y crear nuevos recuerdos juntos...</p>
-  <button class="arrow-down" id="arrowBtn" type="button">
-    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+  <button class="arrow-down" aria-label="Bajar a la cuenta regresiva" id="arrowBtn" type="button">
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden="true">
       <path d="M19 10V28" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
       <path d="M11 20L19 28L27 20" stroke="#FFD700" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
 </section>
 
-<section class="countdown-section" id="countdownSection">
+<section class="countdown-section" aria-label="¡Te espero para festejar!" id="countdownSection">
   <div class="countdown-title">¡Te espero para festejar!</div>
-  <div class="countdown">
+  <div class="countdown" role="timer" aria-live="polite">
     <div class="countcard"><span class="num" id="days">0</span><small>Días</small></div>
     <div class="countcard"><span class="num" id="hours">0</span><small>Horas</small></div>
     <div class="countcard"><span class="num" id="minutes">0</span><small>Minutos</small></div>
     <div class="countcard"><span class="num" id="seconds">0</span><small>Segundos</small></div>
   </div>
 
-
-
-  <div class="party-info">
+  <div class="party-info" style="margin-bottom:32px;">
     <span class="fiesta-title">FIESTA</span>
     <div class="fiesta-details">
       <span>Sábado 7 de Marzo de 2026</span>
@@ -233,40 +225,48 @@ body::before{
     </div>
   </div>
 
-  <div class="controls">
+  <div class="controls" role="group" aria-label="Acciones">
 
     <div class="control">
       <div class="btn-message">Para llegar al salón</div>
-      <button class="icon-btn" id="locationBtn">Cómo llegar</button>
-      <div class="panel" id="locationPanel"><p>Camioneros San Rafael</p>
-        <button class="small-btn" id="openMapsBtn">Abrir en Google Maps ➜</button>
+      <button class="icon-btn" id="locationBtn" aria-expanded="false" aria-controls="locationPanel">
+        Cómo llegar
+      </button>
+      <div class="panel" id="locationPanel" aria-hidden="true">
+        <p>Camioneros San Rafael</p>
+        <button class="small-btn" id="openMapsBtn" type="button">Abrir en Google Maps ➜</button>
       </div>
     </div>
 
     <div class="control">
-    
       <div class="btn-message">Si deseás dejar un detalle, clickeá acá abajo</div>
-      <button class="icon-btn" id="giftBtn">Hacer un regalo</button>
-      <div class="panel" id="giftPanel">
+      <button class="icon-btn" id="giftBtn" aria-expanded="false" aria-controls="giftPanel">
+        Hacer un regalo
+      </button>
+      <div class="panel" id="giftPanel" aria-hidden="true">
         <p>El mejor regalo es que me acompañes, pero si lo deseás también podés colaborar. ¡Muchas gracias!</p>
-        <div class="alias" id="aliasText">RodriSanchez18</div>
-        <button class="small-btn" id="copyBtn">Copiar alias 📋</button>
-        <div class="copied-tip" id="copiedTip" style="display:none">¡Alias copiado!</div>
+        <div class="alias" id="aliasText" title="Tocá para copiar">RodriSanchez18</div>
+        <button class="small-btn" id="copyBtn" type="button">Copiar alias 📋</button>
+        <div class="copied-tip" id="copiedTip" style="display:none">¡Alias copiado al portapapeles!</div>
       </div>
     </div>
 
     <div class="control">
       <div class="btn-message">Confirmación de asistencia</div>
       <div class="confirm-msg-grey">Cuento con tu presencia. ¡Confirmá tu asistencia!</div>
-      <button class="icon-btn" id="confirmBtn">Confirmar asistencia</button>
-      <div class="panel" id="confirmPanel"></div>
+      <button class="icon-btn" id="confirmBtn" aria-expanded="false" aria-controls="confirmPanel">
+        Confirmar asistencia
+      </button>
+      <div class="panel" id="confirmPanel" aria-hidden="true">
+        <!-- Mensaje ahora ya no se usará -->
+      </div>
     </div>
 
   </div>
 </section>
 
 <script>
-/* Confetti */
+/* ===== Confetti ===== */
 for(let i=0;i<100;i++){
   const c=document.createElement('div');
   c.className='confetti';
@@ -278,12 +278,12 @@ for(let i=0;i<100;i++){
   document.body.appendChild(c);
 }
 
-/* Flecha scroll */
+/* ===== Flecha: scroll suave ===== */
 document.getElementById('arrowBtn').addEventListener('click', () => {
   document.getElementById('countdownSection').scrollIntoView({behavior: 'smooth'});
 });
 
-/* Countdown */
+/* ===== Countdown ===== */
 const target=new Date("March 7, 2026 21:00:00").getTime();
 function updateCountdown(){
   const now=Date.now();
@@ -303,35 +303,88 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000); updateCountdown();
 
-/* Panels */
-function togglePanel(btn,panel){
-  const open=panel.classList.contains('open');
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
-  if(!open){ panel.classList.add('open'); panel.style.maxHeight=panel.scrollHeight+'px'; }
+/* ===== Panels ===== */
+const panels = {
+  location: document.getElementById('locationPanel'),
+  gift: document.getElementById('giftPanel'),
+  confirm: document.getElementById('confirmPanel')
+};
+const buttons = {
+  location: document.getElementById('locationBtn'),
+  gift: document.getElementById('giftBtn'),
+  confirm: document.getElementById('confirmBtn')
+};
+
+function setPanelState(panel, btn, open){
+  if(open){
+    panel.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    panel.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+  }else{
+    panel.classList.remove('open');
+    panel.style.maxHeight = '0';
+    panel.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+  }
 }
-document.getElementById('locationBtn').onclick=()=>togglePanel(locationBtn,locationPanel);
-document.getElementById('giftBtn').onclick=()=>togglePanel(giftBtn,giftPanel);
-document.getElementById('confirmBtn').onclick=()=>window.location.href="https://docs.google.com/forms/d/e/1FAIpQLSdUtqrwGXFeSEcEhGKQROeYp0VdvFrOQx56KMzQdB7Oubpaig/viewform?usp=header";
 
-/* Maps */
-document.getElementById('openMapsBtn').onclick=()=>window.open('https://www.google.com/maps?q=Camioneros+San+Rafael','_blank');
+function closeAllPanels(){
+  setPanelState(panels.location, buttons.location, false);
+  setPanelState(panels.gift, buttons.gift, false);
+  setPanelState(panels.confirm, buttons.confirm, false);
+}
 
-/* Copiar alias */
+function togglePanel(btnKey){
+  const panel = panels[btnKey];
+  const btn = buttons[btnKey];
+  const willOpen = !panel.classList.contains('open');
+  closeAllPanels();
+  setPanelState(panel, btn, willOpen);
+}
+
+/* Eventos de botones */
+buttons.location.addEventListener('click', ()=>togglePanel('location'));
+buttons.gift.addEventListener('click', ()=>togglePanel('gift'));
+
+/* ===== Confirmación: redirigir a Google Forms ===== */
+buttons.confirm.addEventListener('click', () => {
+  setPanelState(panels.confirm, buttons.confirm, false);
+  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSdUtqrwGXFeSEcEhGKQROeYp0VdvFrOQx56KMzQdB7Oubpaig/viewform?usp=header";
+});
+
+/* ===== Ubicación: abrir Maps ===== */
+document.getElementById('openMapsBtn').addEventListener('click',()=>{
+  window.open('https://www.google.com/maps?q=Camioneros+San+Rafael','_blank','noopener,noreferrer');
+});
+
+/* ===== Regalo: copiar alias ===== */
 const aliasText=document.getElementById('aliasText');
 const copyBtn=document.getElementById('copyBtn');
 const copiedTip=document.getElementById('copiedTip');
+
 async function copyAlias(){
-  const value=aliasText.textContent.trim();
-  try{ await navigator.clipboard.writeText(value); }catch{
-    const ta=document.createElement('textarea'); ta.value=value; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy'); ta.remove();
+  const value = aliasText.textContent.trim();
+  try{
+    await navigator.clipboard.writeText(value);
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=value;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
   }
-  copiedTip.style.display='block'; setTimeout(()=>copiedTip.style.display='none',2300);
+  copiedTip.style.display='block';
+  setTimeout(()=>copiedTip.style.display='none',2300);
 }
-aliasText.onclick=copyAlias; copyBtn.onclick=copyAlias;
+aliasText.addEventListener('click',copyAlias);
+copyBtn.addEventListener('click',copyAlias);
 </script>
+
 </body>
 </html>
+
 
 
 
