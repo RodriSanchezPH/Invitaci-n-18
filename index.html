@@ -118,7 +118,19 @@ body::before{
 .control{ display:flex; flex-direction:column; align-items:center; max-width:360px; width:100%; }
 .btn-message{ text-align:center; font-size:0.98rem; color:#f7e7b0; margin-bottom:10px; font-weight:400; }
 
-/* Botón pro: texto largo sin encimarse */
+/* Imagen arriba de los botones */
+.control img {
+  width:120px;
+  height:120px;
+  object-fit:contain;
+  margin-bottom:14px;
+  filter: drop-shadow(0 0 14px rgba(255,215,0,0.35));
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Botón pro */
 .icon-btn {
   width:100%;
   min-height:56px;
@@ -188,6 +200,7 @@ body::before{
   .icon-btn{ font-size:1rem; min-height:54px }
   .countcard span.num{ font-size:1.6rem }
   .countdown{ flex-wrap:nowrap; overflow-x:auto; padding:0 10px; gap:12px; }
+  .control img{ width:100px; height:100px; margin-bottom:12px; }
 }
 </style>
 </head>
@@ -228,6 +241,7 @@ body::before{
   <div class="controls" role="group" aria-label="Acciones">
 
     <div class="control">
+      <img src="images/ubi.png" alt="Ubicación">
       <div class="btn-message">Para llegar al salón</div>
       <button class="icon-btn" id="locationBtn" aria-expanded="false" aria-controls="locationPanel">
         Cómo llegar
@@ -239,6 +253,7 @@ body::before{
     </div>
 
     <div class="control">
+      <img src="images/regalo.png" alt="Regalo">
       <div class="btn-message">Si deseás dejar un detalle, clickeá acá abajo</div>
       <button class="icon-btn" id="giftBtn" aria-expanded="false" aria-controls="giftPanel">
         Hacer un regalo
@@ -252,14 +267,13 @@ body::before{
     </div>
 
     <div class="control">
+      <img src="images/asistencia.png" alt="Confirmar asistencia">
       <div class="btn-message">Confirmación de asistencia</div>
       <div class="confirm-msg-grey">Cuento con tu presencia. ¡Confirmá tu asistencia!</div>
       <button class="icon-btn" id="confirmBtn" aria-expanded="false" aria-controls="confirmPanel">
         Confirmar asistencia
       </button>
-      <div class="panel" id="confirmPanel" aria-hidden="true">
-        <!-- Mensaje ahora ya no se usará -->
-      </div>
+      <div class="panel" id="confirmPanel" aria-hidden="true"></div>
     </div>
 
   </div>
@@ -384,7 +398,3 @@ copyBtn.addEventListener('click',copyAlias);
 
 </body>
 </html>
-
-
-
-
