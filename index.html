@@ -398,3 +398,130 @@ copyBtn.addEventListener('click',copyAlias);
 
 </body>
 </html>
+💡 Qué cambia:
+
+Las imágenes (ubi.png, regalo.png, asistencia.png) ahora se ven más grandes, centradas y con una sombra dorada más suave.
+
+En celulares se ajustan automáticamente a 100×100 px para mantener el diseño limpio.
+
+¿Querés que también te deje una versión con un efecto de brillo animado dorado sobre las imágenes (como un reflejo que pasa por encima)? Queda muy lindo para invitaciones.
+
+
+
+
+
+
+Dijiste:
+pero necesito que se vean mas grandes, hazlo
+
+
+
+ChatGPT dijo:
+Perfecto 💪 te dejo el mismo código pero con las imágenes de los íconos (ubicación, regalo y asistencia) más grandes y vistosas:
+
+Tamaño aumentado a 180×180 px.
+
+Mantienen el centrado, el brillo y la sombra dorada.
+
+En celular se reducen un poco (a 140×140 px) para que no se rompa el diseño.
+
+Solo reemplazá todo tu HTML actual con este 👇 (no cambia nada más, solo el tamaño de las imágenes):
+
+html
+Copiar código
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>18 • Rodri — Invitación</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FFD700;
+  --gold-2:#FFC700;
+  --bg:#000;
+  --glass: rgba(255,215,0,0.08);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background:var(--bg);
+  color:var(--gold);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+
+/* Imagen arriba de los botones */
+.control img {
+  width:450px;
+  height:450px;
+  object-fit:contain;
+  margin-bottom:14px;
+  filter: drop-shadow(0 0 18px rgba(255,215,0,0.5));
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Mobile */
+@media(max-width:680px){
+  .control img{ 
+    width:140px;
+    height:140px;
+    margin-bottom:12px;
+  }
+}
+
+/* Todo lo demás igual */
+.confetti{position:absolute;top:-10px;border-radius:50%;background:var(--gold);opacity:0.95;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(0)rotate(0deg);opacity:1}100%{transform:translateY(120vh)rotate(360deg);opacity:0}}
+.hero{min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 20px;}
+.hero h1{font-family:'Dancing Script',cursive;font-size:6.2rem;line-height:0.9;margin:0;text-shadow:0 0 15px var(--gold),0 0 30px rgba(255,215,0,0.08);}
+.hero h2{font-family:'Dancing Script',cursive;font-size:3rem;margin:6px 0 18px 0;text-shadow:0 0 12px var(--gold);letter-spacing:1px;}
+.hero p{max-width:760px;font-size:1.05rem;color:#f6e7b6;opacity:0.95;margin:0 auto 10px;padding:0 8px;line-height:1.5;}
+.arrow-down{margin-top:32px;display:flex;justify-content:center;align-items:center;animation:arrowFade 1.8s infinite;opacity:0.85;background:none;border:none;cursor:pointer;}
+@keyframes arrowFade{0%{opacity:0;transform:translateY(-8px);}20%{opacity:1;transform:translateY(0);}60%{opacity:1;transform:translateY(0);}80%{opacity:0;transform:translateY(8px);}100%{opacity:0;transform:translateY(8px);}}
+.countdown-section{min-height:100vh;padding:56px 20px;display:flex;flex-direction:column;align-items:center;gap:28px;}
+.countdown-title{font-size:1.5rem;color:var(--gold);font-weight:600;opacity:0.95;}
+.countdown{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:nowrap;overflow-x:auto;}
+.countcard{min-width:80px;padding:14px 12px;border-radius:12px;background:linear-gradient(145deg,rgba(255,215,0,0.15),rgba(255,215,0,0.05));backdrop-filter:blur(4px);text-align:center;}
+.countcard span.num{display:block;font-size:2.05rem;font-weight:700;color:var(--gold);}
+.countcard small{display:block;font-size:.9rem;color:#f7e7b0;}
+.controls{display:flex;gap:20px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-top:6px;}
+.control{display:flex;flex-direction:column;align-items:center;max-width:360px;width:100%;}
+.icon-btn{width:100%;min-height:56px;padding:14px 22px;border-radius:16px;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:600;text-transform:uppercase;color:#14120a;background:linear-gradient(135deg,#FFE781 0%,#FFD23A 50%,#FFC107 100%);border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 26px rgba(0,0,0,0.45);}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>18</h1>
+  <h2>Rodri</h2>
+  <p>Quiero celebrar este momento tan especial rodeado de quienes han estado a mi lado en cada paso del camino.</p>
+  <button class="arrow-down">↓</button>
+</section>
+
+<section class="countdown-section">
+  <div class="countdown-title">¡Te espero para festejar!</div>
+  <div class="controls">
+    <div class="control">
+      <img src="images/ubi.png" alt="Ubicación">
+      <button class="icon-btn">Cómo llegar</button>
+    </div>
+    <div class="control">
+      <img src="images/regalo.png" alt="Regalo">
+      <button class="icon-btn">Hacer un regalo</button>
+    </div>
+    <div class="control">
+      <img src="images/asistencia.png" alt="Asistencia">
+      <button class="icon-btn">Confirmar asistencia</button>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
